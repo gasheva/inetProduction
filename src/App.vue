@@ -19,6 +19,7 @@ export default {
 
   components: {
     ContentBlock,
+      // eslint-disable-next-line vue/no-reserved-component-names
     Footer
   },
 
