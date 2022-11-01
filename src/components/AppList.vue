@@ -25,14 +25,14 @@
   </v-list>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-    name: "AppList",
+    name: 'AppList',
     props: {
         items: {type: Array, default: () => []}
     },
 
-}
+};
 </script>
 
 <style scoped>

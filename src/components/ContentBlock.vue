@@ -46,9 +46,9 @@
   </v-container>
 </template>
 
-<script>
-import AppFilter from "@/components/AppFilter.vue";
-import AppList from "@/components/AppList.vue";
+<script lang="ts">
+import AppFilter from '@/components/AppFilter.vue';
+import AppList from '@/components/AppList.vue';
 
 export default {
     name: 'ContentBlock',
@@ -94,5 +94,5 @@ export default {
             },
         ],
     }),
-}
+};
 </script>

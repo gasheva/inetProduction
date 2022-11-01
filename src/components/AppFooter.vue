@@ -1,11 +1,11 @@
 <template>
   <v-card
-      flat
-      tile
-      width="100%"
-      class="red lighten-1 text-center"
+    flat
+    tile
+    width="100%"
+    class="red lighten-1 text-center"
   >
-    <v-divider></v-divider>
+    <v-divider />
 
     <v-card-text class="white--text">
       {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
@@ -13,10 +13,10 @@
   </v-card>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: 'Footer',
+    name: 'AppFooter',
 
-  data: () => ({}),
-}
+    data: () => ({}),
+};
 </script>

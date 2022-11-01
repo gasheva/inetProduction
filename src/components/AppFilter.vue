@@ -8,9 +8,9 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 export default {
-    name: "AppFilter",
+    name: 'AppFilter',
     props: {
         label: {type: String, default: ''},
         items: {type: Array, default: () => []},
@@ -19,13 +19,13 @@ export default {
     data() {
         return {
             variant: 'default',
-        }
+        };
     },
 
     methods() {
 
     }
-}
+};
 </script>
 
 <style scoped>

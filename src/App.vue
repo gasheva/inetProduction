@@ -8,22 +8,21 @@
       app
       v-bind="localAttrs"
     >
-      <Footer />
+      <AppFooter />
     </v-footer>
   </v-app>
 </template>
 
-<script>
-import ContentBlock from './components/ContentBlock';
-import Footer from './components/Footer';
+<script lang="ts">
+import ContentBlock from './components/ContentBlock.vue';
+import AppFooter from './components/AppFooter.vue';
 
 export default {
     name: 'App',
 
     components: {
         ContentBlock,
-        // eslint-disable-next-line vue/no-reserved-component-names
-        Footer
+        AppFooter
     },
 
     data: () => ({
@@ -32,12 +31,11 @@ export default {
 
     computed: {
         localAttrs() {
-            const attrs = {}
-
-            attrs.absolute = true
-            attrs.fixed = false
-
-            return attrs
+            const attrs = {
+                absolute: true,
+                fixed: false,
+            };
+            return attrs;
         },
     },
 };
