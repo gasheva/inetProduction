@@ -1,10 +1,13 @@
 <template>
   <v-app>
     <v-main>
-      <ContentBlock/>
+      <ContentBlock />
     </v-main>
 
-    <v-footer app v-bind="localAttrs">
+    <v-footer
+      app
+      v-bind="localAttrs"
+    >
       <Footer />
     </v-footer>
   </v-app>
@@ -15,27 +18,27 @@ import ContentBlock from './components/ContentBlock';
 import Footer from './components/Footer';
 
 export default {
-  name: 'App',
+    name: 'App',
 
-  components: {
-    ContentBlock,
-      // eslint-disable-next-line vue/no-reserved-component-names
-    Footer
-  },
-
-  computed: {
-    localAttrs () {
-      const attrs = {}
-
-      attrs.absolute = true
-      attrs.fixed = false
-
-      return attrs
+    components: {
+        ContentBlock,
+        // eslint-disable-next-line vue/no-reserved-component-names
+        Footer
     },
-  },
 
-  data: () => ({
-    //
-  }),
+    data: () => ({
+        //
+    }),
+
+    computed: {
+        localAttrs() {
+            const attrs = {}
+
+            attrs.absolute = true
+            attrs.fixed = false
+
+            return attrs
+        },
+    },
 };
 </script>

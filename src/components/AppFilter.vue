@@ -1,11 +1,11 @@
 <template>
-    <!--        Filters-->
-    <v-select
-            v-model="variant"
-            :items="items"
-            clearable
-            :label=label
-    ></v-select>
+  <!--        Filters-->
+  <v-select
+    v-model="variant"
+    :items="items"
+    clearable
+    :label="label"
+  />
 </template>
 
 <script>
@@ -16,13 +16,13 @@ export default {
         items: {type: Array, default: () => []},
     },
 
-    data(){
-        return{
+    data() {
+        return {
             variant: 'default',
         }
     },
 
-    methods(){
+    methods() {
 
     }
 }
