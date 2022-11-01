@@ -5,6 +5,7 @@
         justify="center"
         class="ma-4"
     >
+<!--        Logo-->
       <v-col cols="12">
         <v-img
             :src="require('../assets/logo.svg')"
@@ -14,25 +15,16 @@
         />
       </v-col>
 
+<!--        Filters-->
       <v-col
           cols="12"
           md="4"
       >
-        <v-select
-            v-model="variant"
-            :items="items"
-            clearable
-            label="Filter by country"
-        ></v-select>
-
-        <v-select
-            v-model="variant"
-            :items="items"
-            clearable
-            label="Filter by score"
-        ></v-select>
+          <app-filter label="Filter by country" :items="items"/>
+          <app-filter label="Filter by score" :items="items"/>
       </v-col>
 
+<!--        List-->
       <v-col
           cols="12"
           md="4"
@@ -41,35 +33,7 @@
             max-width="450"
             class="mx-auto"
         >
-          <v-list three-line>
-            <template v-for="(item, index) in users">
-              <v-subheader
-                  v-if="item.header"
-                  :key="item.header"
-                  v-text="item.header"
-              ></v-subheader>
-
-              <v-divider
-                  v-else-if="item.divider"
-                  :key="index"
-                  :inset="item.inset"
-              ></v-divider>
-
-              <v-list-item
-                  v-else
-                  :key="item.title"
-              >
-                <v-list-item-avatar>
-                  <v-img :src="item.avatar"></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-          </v-list>
+            <app-list :items="users"/>
         </v-card>
 
       </v-col>
@@ -78,10 +42,12 @@
 </template>
 
 <script>
+  import AppFilter from "@/components/AppFilter.vue";
+  import AppList from "@/components/AppList.vue";
   export default {
     name: 'ContentBlock',
-
-    data: () => ({
+      components: {AppList, AppFilter},
+      data: () => ({
       items: [
         'russia',
         'usa',
