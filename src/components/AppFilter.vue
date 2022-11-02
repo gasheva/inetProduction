@@ -11,21 +11,17 @@
 <script lang="ts">
 export default {
     name: 'AppFilter',
-    props: {
-        label: {type: String, default: ''},
-        items: {type: Array, default: () => []},
-    },
-
-    data() {
-        return {
-            variant: 'default',
-        };
-    },
-
-    methods() {
-
-    }
 };
+</script>
+<script setup lang="ts">
+import {ref} from 'vue';
+
+const props = defineProps({
+    label: {type: String, default: ''},
+    items: {type: Array, default: () => []},
+});
+
+const variant = ref<string>('default');
 </script>
 
 <style scoped>

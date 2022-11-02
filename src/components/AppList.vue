@@ -28,12 +28,16 @@
 <script lang="ts">
 export default {
     name: 'AppList',
-    props: {
-        items: {type: Array, default: () => []}
-    },
-
 };
 </script>
+<script setup lang="ts">
+
+const props = defineProps({
+    items: {type: Array, default: () => []}
+
+});
+</script>
+
 
 <style scoped>
 

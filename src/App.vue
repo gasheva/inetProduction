@@ -14,29 +14,21 @@
 </template>
 
 <script lang="ts">
-import ContentBlock from './components/ContentBlock.vue';
-import AppFooter from './components/AppFooter.vue';
 
 export default {
     name: 'App',
-
-    components: {
-        ContentBlock,
-        AppFooter
-    },
-
-    data: () => ({
-        //
-    }),
-
-    computed: {
-        localAttrs() {
-            const attrs = {
-                absolute: true,
-                fixed: false,
-            };
-            return attrs;
-        },
-    },
 };
+</script>
+<script setup lang="ts">
+import {computed} from 'vue';
+import ContentBlock from '@/components/ContentBlock.vue';
+import AppFooter from '@/components/AppFooter.vue';
+
+const localAttrs = computed(() => {
+    const attrs = {
+        absolute: true,
+        fixed: false,
+    };
+    return attrs;
+});
 </script>
