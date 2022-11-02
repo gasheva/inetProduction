@@ -19,7 +19,7 @@ export default {
 <script setup lang="ts">
 import {User} from '@/interfaces/user';
 
-const props = defineProps({
+defineProps({
     item: {type: Object as () => User, required: true},
 });
 </script>

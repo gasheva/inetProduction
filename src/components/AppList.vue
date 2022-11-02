@@ -39,7 +39,7 @@ export default {
 import AppListItem from '@/components/AppListItem.vue';
 import {Users} from '@/interfaces/users';
 
-const props = defineProps({
+defineProps({
     items: {type: Array as () => Users, default: () => []}
 
 });
