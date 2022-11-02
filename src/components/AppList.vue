@@ -3,30 +3,13 @@
     three-line
     @click="showPlace"
   >
-    <template v-for="(item, index) in items">
-      <v-list-subheader
-        v-if="item.header"
-        :key="item.header"
-        v-text="item.header"
-      />
-
-      <v-divider
-        v-else-if="item.divider"
-        :key="index"
-        :inset="item.inset"
-      />
-
-      <v-list-item
-        v-else
-        :key="item.title"
-        class="item"
-        :prepend-avatar="item.avatar"
-        :data-item="item.place"
-      >
-        <v-list-item-title v-html="item.title" />
-        <v-list-item-subtitle v-html="item.subtitle" />
-      </v-list-item>
-    </template>
+    <app-list-item
+      v-for="(item, index) in items"
+      :key="item.title"
+      class="item"
+      :data-item="item.place"
+      :item="item"
+    />
   </v-list>
 </template>
 
@@ -37,11 +20,12 @@ export default {
 </script>
 <script setup lang="ts">
 
+import AppListItem from '@/components/AppListItem.vue';
+
 const props = defineProps({
     items: {type: Array, default: () => []}
 
 });
-
 
 const showPlace = (e: any): void => {
     let item = e.target.closest('div[data-item]');
