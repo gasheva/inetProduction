@@ -10,4 +10,4 @@ export interface UsersDivider {
     inset: boolean;
 }
 
-export type Users = User[]
+export type Users = (User | UsersHeader | UsersDivider)[]

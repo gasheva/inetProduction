@@ -5,7 +5,6 @@
     :data-item="item.place"
     :prepend-avatar="item.avatar"
   >
-    <!--      :prepend-avatar="item.avatar"-->
     <v-list-item-title v-html="item.title" />
     <v-list-item-subtitle v-html="item.subtitle" />
   </v-list-item>

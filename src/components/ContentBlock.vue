@@ -72,10 +72,11 @@ import AppFilter from '@/components/AppFilter.vue';
 import AppList from '@/components/AppList.vue';
 import {scores, countries} from '@/constants/filters';
 import {useStore} from 'vuex';
-import {Users} from '@/interfaces/users';
+import {Users, UsersHeader, UsersDivider} from '@/interfaces/users';
+import {User} from '@/interfaces/user';
 
 const USERS = [
-    // {header: 'List'},
+    {header: 'List'},
     {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
         title: 'Brunch this weekend?',
@@ -84,7 +85,7 @@ const USERS = [
         score: 12,
         place: 'Washington',
     },
-    // {divider: true, inset: true},
+    {divider: true, inset: true},
     {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
         title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
@@ -93,7 +94,7 @@ const USERS = [
         score: 13,
         place: 'Perm',
     },
-    // {divider: true, inset: true},
+    {divider: true, inset: true},
     {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
         title: 'Oui oui',
@@ -102,7 +103,7 @@ const USERS = [
         score: 21,
         place: 'New York',
     },
-    // {divider: true, inset: true},
+    {divider: true, inset: true},
     {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
         title: 'Birthday gift',
@@ -111,7 +112,7 @@ const USERS = [
         score: 31,
         place: 'Moscow',
     },
-    // {divider: true, inset: true},
+    {divider: true, inset: true},
     {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
         title: 'Recipe to try',
@@ -126,7 +127,8 @@ const store = useStore();
 const users = ref<Users>([]);
 const usersFiltered = computed(() => {
     return users.value.filter(user => {
-        let isCountryEqual = !countryVariant.value || user.country === countryVariant.value;
+        if ((<UsersDivider>user).divider || (<UsersHeader>user).header) return true;
+        let isCountryEqual = !countryVariant.value || (<User>user).country === countryVariant.value;
         // let isScoreEqual = scoreVariant.value==='default' || user.score === scoreVariant.value;
 
         return isCountryEqual;
