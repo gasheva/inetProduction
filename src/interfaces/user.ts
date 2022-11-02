@@ -3,5 +3,6 @@ export interface User {
     title: string;
     subtitle: string;
     country: string;
+    place: string;
     score: number;
 }
