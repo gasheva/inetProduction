@@ -4,6 +4,7 @@
     class="item"
     :data-item="item.place"
     :prepend-avatar="item.avatar"
+    :subtitle="'score:' + item.score"
   >
     <v-list-item-title v-html="item.title" />
     <v-list-item-subtitle v-html="item.subtitle" />

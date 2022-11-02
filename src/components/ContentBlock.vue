@@ -74,6 +74,7 @@ import {scores, countries} from '@/constants/filters';
 import {useStore} from 'vuex';
 import {Users, UsersHeader, UsersDivider} from '@/interfaces/users';
 import {User} from '@/interfaces/user';
+import {isCountryEqual, isScoreRight} from '@/utils/filters';
 
 const USERS = [
     {header: 'List'},
@@ -91,7 +92,7 @@ const USERS = [
         title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
         subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
         country: 'russia',
-        score: 13,
+        score: 1,
         place: 'Perm',
     },
     {divider: true, inset: true},
@@ -128,10 +129,7 @@ const users = ref<Users>([]);
 const usersFiltered = computed(() => {
     return users.value.filter(user => {
         if ((<UsersDivider>user).divider || (<UsersHeader>user).header) return true;
-        let isCountryEqual = !countryVariant.value || (<User>user).country === countryVariant.value;
-        // let isScoreEqual = scoreVariant.value==='default' || user.score === scoreVariant.value;
-
-        return isCountryEqual;
+        return isCountryEqual(<User>user, countryVariant.value) && isScoreRight(<User>user, scoreVariant.value);
     });
 });
 
