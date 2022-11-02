@@ -1,7 +1,7 @@
 <template>
   <!--        Filters-->
   <v-select
-    v-model="variant"
+    v-model="displayVariant"
     :items="items"
     clearable
     :label="label"
@@ -14,14 +14,23 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed} from 'vue';
 
 const props = defineProps({
     label: {type: String, default: ''},
+    variant: {type: String, default: ''},
     items: {type: Array, default: () => []},
 });
 
-const variant = ref<string>('default');
+const emit = defineEmits(['update:variant']);
+const displayVariant = computed({
+    get() {
+        return props.variant;
+    },
+    set(val: string) {
+        emit('update:variant', val);
+    }
+});
 </script>
 
 <style scoped>

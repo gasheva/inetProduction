@@ -21,12 +21,14 @@
         md="4"
       >
         <app-filter
+          v-model:variant="countryVariant"
           label="Filter by country"
-          :items="items"
+          :items="countries"
         />
         <app-filter
+          v-model:variant="scoreVariant"
           label="Filter by score"
-          :items="items"
+          :items="scores"
         />
       </v-col>
 
@@ -34,12 +36,23 @@
       <v-col
         cols="12"
         md="4"
+        class="d-flex"
       >
+        <v-progress-circular
+          v-show="isLoading"
+          indeterminate
+          color="primary"
+          class="mx-auto"
+        />
         <v-card
+          v-if="!isLoading"
           max-width="450"
           class="mx-auto"
         >
-          <app-list :items="users" />
+          <app-list
+            v-if="!isLoading"
+            :items="usersFiltered"
+          />
         </v-card>
       </v-col>
     </v-row>
@@ -47,52 +60,86 @@
 </template>
 
 <script lang="ts">
-import AppFilter from '@/components/AppFilter.vue';
-import AppList from '@/components/AppList.vue';
 
 export default {
     name: 'ContentBlock',
-    components: {AppList, AppFilter},
-    data: () => ({
-        items: [
-            'russia',
-            'usa',
-            '> 20',
-            '< 10',
-        ],
-        variant: 'default',
-        users: [
-            {header: 'List'},
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                title: 'Brunch this weekend?',
-                subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-            },
-            {divider: true, inset: true},
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-                subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-            },
-            {divider: true, inset: true},
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                title: 'Oui oui',
-                subtitle: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-            },
-            {divider: true, inset: true},
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                title: 'Birthday gift',
-                subtitle: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-            },
-            {divider: true, inset: true},
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                title: 'Recipe to try',
-                subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-            },
-        ],
-    }),
 };
+</script>
+<script setup lang="ts">
+import {useFetch} from '@/composable/fetching';
+import {computed, onBeforeMount, ref} from 'vue';
+import AppFilter from '@/components/AppFilter.vue';
+import AppList from '@/components/AppList.vue';
+import {scores, countries} from '@/constants/filters';
+
+const USERS = [
+    // {header: 'List'},
+    {
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+        title: 'Brunch this weekend?',
+        subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        country: 'usa',
+        score: 12,
+    },
+    // {divider: true, inset: true},
+    {
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+        title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+        subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+        country: 'russia',
+        score: 13,
+    },
+    // {divider: true, inset: true},
+    {
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+        title: 'Oui oui',
+        subtitle: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+        country: 'usa',
+        score: 21,
+    },
+    // {divider: true, inset: true},
+    {
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+        title: 'Birthday gift',
+        subtitle: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        country: 'russia',
+        score: 31,
+    },
+    // {divider: true, inset: true},
+    {
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+        title: 'Recipe to try',
+        subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        country: 'russia',
+        score: 101,
+    },
+];
+
+
+const users = ref([]);
+const usersFiltered = computed(() => {
+    return users.value.filter(user => {
+        let isCountryEqual = !countryVariant.value || user.country === countryVariant.value;
+        // let isScoreEqual = scoreVariant.value==='default' || user.score === scoreVariant.value;
+
+        return isCountryEqual;
+    });
+});
+
+const {isLoading, fetch} = useFetch(fetchUsers);
+const scoreVariant = ref<string | null>(null);
+const countryVariant = ref<string | null>(null);
+
+async function fetchUsers() {
+    const pr = new Promise(resolve => {
+        setTimeout(() => resolve(true), 1000 * 1);
+    });
+    await pr;
+    users.value = USERS;
+}
+
+onBeforeMount(() => {
+    fetch();
+});
+
 </script>
