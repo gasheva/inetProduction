@@ -31,6 +31,7 @@ const displayVariant = computed({
         emit('update:variant', val);
     }
 });
+
 </script>
 
 <style scoped>

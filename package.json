@@ -12,6 +12,7 @@
     "sass-loader": "^13.1.0",
     "vue": "^3.2.41",
     "vuetify": "^3.0.0",
+    "vuex": "^4.1.0",
     "webpack": "^5.74.0"
   },
   "devDependencies": {

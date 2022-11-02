@@ -71,6 +71,7 @@ import {computed, onBeforeMount, ref} from 'vue';
 import AppFilter from '@/components/AppFilter.vue';
 import AppList from '@/components/AppList.vue';
 import {scores, countries} from '@/constants/filters';
+import {useStore} from 'vuex';
 
 const USERS = [
     // {header: 'List'},
@@ -114,7 +115,7 @@ const USERS = [
         score: 101,
     },
 ];
-
+const store = useStore();
 
 const users = ref([]);
 const usersFiltered = computed(() => {
@@ -127,8 +128,14 @@ const usersFiltered = computed(() => {
 });
 
 const {isLoading, fetch} = useFetch(fetchUsers);
-const scoreVariant = ref<string | null>(null);
-const countryVariant = ref<string | null>(null);
+const scoreVariant = computed({
+    get: (): string | null => store.getters.getScoreVariant,
+    set: (val: string | null) => store.commit('setScoreFilterVariant', val)
+});
+const countryVariant = computed({
+    get: (): string | null => store.getters.getCountryVariant,
+    set: (val: string | null) => store.commit('setCountryFilterVariant', val)
+});
 
 async function fetchUsers() {
     const pr = new Promise(resolve => {
